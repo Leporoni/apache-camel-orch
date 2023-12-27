@@ -2,18 +2,18 @@ API Products
 
 //create product
 curl -X POST -H "Content-Type: application/json" -d '{
-  "name": "Notebook Asus 4080",
+  "name": "Asus Laptop 4080",
   "price": 2700.99
 }' http://localhost:8087/products
 
 //create multiple products
 curl -X POST -H "Content-Type: application/json" -d '[
   {
-    "name": "Notebook Asus 4080",
+    "name": "Asus Laptop 4080",
     "price": 2700.99
   },
   {
-    "name": "Teclado Mecânico RGB",
+    "name": "Mechanic Keyboard RGB",
     "price": 49.99
   }
 ]' http://localhost:8087/products/addProducts
