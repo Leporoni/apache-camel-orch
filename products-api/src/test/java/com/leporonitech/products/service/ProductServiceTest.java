@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         Optional<Product> ofResult = Optional.of(product);
         when(productRepository.findById(Mockito.<Long>any())).thenReturn(ofResult);
         Optional<Product> actualProductById = productService.getProductById(1L);
@@ -63,13 +64,13 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         when(productRepository.save(Mockito.<Product>any())).thenReturn(product);
 
         Product product2 = new Product();
         product2.setId(1L);
         product2.setName("Name");
-        product2.setPrice(10.0d);
+        product2.setPrice(BigDecimal.valueOf(10.0d));
         assertSame(product, productService.createProduct(product2));
         verify(productRepository).save(Mockito.<Product>any());
     }
@@ -86,13 +87,13 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         when(productRepository.save(Mockito.<Product>any())).thenReturn(product);
 
         Product product2 = new Product();
         product2.setId(1L);
         product2.setName("Name");
-        product2.setPrice(10.0d);
+        product2.setPrice(BigDecimal.valueOf(10.0d));
 
         ArrayList<Product> products = new ArrayList<>();
         products.add(product2);
@@ -106,18 +107,18 @@ public class ProductServiceTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         when(productRepository.save(Mockito.<Product>any())).thenReturn(product);
 
         Product product2 = new Product();
         product2.setId(1L);
         product2.setName("Name");
-        product2.setPrice(10.0d);
+        product2.setPrice(BigDecimal.valueOf(10.0d));
 
         Product product3 = new Product();
         product3.setId(2L);
         product3.setName(String.join("", "com.", System.getProperty("user.name"), "tech.products.model.Product"));
-        product3.setPrice(0.5d);
+        product3.setPrice(BigDecimal.valueOf(0.5d));
 
         ArrayList<Product> products = new ArrayList<>();
         products.add(product3);

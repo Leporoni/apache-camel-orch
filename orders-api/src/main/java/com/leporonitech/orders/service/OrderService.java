@@ -3,17 +3,14 @@ package com.leporonitech.orders.service;
 import com.leporonitech.orders.model.Order;
 import com.leporonitech.orders.repository.OrderRepository;
 import com.leporonitech.products.model.Product;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.Exchange;
 import org.apache.camel.ExchangePattern;
 import org.apache.camel.Processor;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Date;
-import java.util.Calendar;
-import java.util.List;
+import org.apache.camel.ProducerTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -28,7 +25,11 @@ public class OrderService {
 
         Order order = new Order();
         order.setOrderDate(new Date());
-        order.setProducts(products);
+
+        for (Product product : products) {
+            order.setProductName(product.getName());
+            order.setProductPrice(product.getPrice());
+        }
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(order.getOrderDate());
@@ -52,3 +53,4 @@ public class OrderService {
         return exchange.getMessage().getBody(List.class);
     }
 }
+

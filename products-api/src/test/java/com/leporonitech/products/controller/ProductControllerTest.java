@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.leporonitech.products.model.Product;
 import com.leporonitech.products.service.ProductService;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -50,7 +51,7 @@ class ProductControllerTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         Optional<Product> ofResult = Optional.of(product);
         when(productService.getProductById(Mockito.<Long>any())).thenReturn(ofResult);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/products/{id}", 1L);
@@ -69,7 +70,7 @@ class ProductControllerTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
 
         ArrayList<Product> productList = new ArrayList<>();
         productList.add(product);
@@ -134,7 +135,7 @@ class ProductControllerTest {
         Product product = new Product();
         product.setId(1L);
         product.setName("Name");
-        product.setPrice(10.0d);
+        product.setPrice(BigDecimal.valueOf(10.0d));
         String content = (new ObjectMapper()).writeValueAsString(product);
         MockHttpServletRequestBuilder requestBuilder = MockMvcRequestBuilders.get("/products")
                 .contentType(MediaType.APPLICATION_JSON)

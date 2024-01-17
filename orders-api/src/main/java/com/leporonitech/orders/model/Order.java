@@ -1,9 +1,9 @@
 package com.leporonitech.orders.model;
 
-import com.leporonitech.products.model.Product;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "tb_order")
@@ -13,13 +13,11 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
-    @ManyToMany
-    @JoinTable(
-            name = "order_product",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id")
-    )
-    private List<Product> products;
+    @Column(name = "product_name")
+    private String productName;
+
+    @Column(name = "product_price")
+    private BigDecimal productPrice;
 
     @Column(name = "order_date")
     private Date orderDate;
@@ -35,12 +33,20 @@ public class Order {
         this.id = id;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProducts(List<Product> products) {
-        this.products = products;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public BigDecimal getProductPrice() {
+        return productPrice;
+    }
+
+    public void setProductPrice(BigDecimal productPrice) {
+        this.productPrice = productPrice;
     }
 
     public Date getOrderDate() {
