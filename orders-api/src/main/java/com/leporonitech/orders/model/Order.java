@@ -1,27 +1,31 @@
 package com.leporonitech.orders.model;
 
+import com.leporonitech.products.model.Product;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "tb_order")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id")
     private Long id;
 
-    @Column(name = "product_id")
-    private Long productId;
-
-    @Column(name = "quantity")
-    private int quantity;
+    @ManyToMany
+    @JoinTable(
+            name = "order_product",
+            joinColumns = @JoinColumn(name = "order_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 
     @Column(name = "order_date")
-    private LocalDateTime orderDate;
+    private Date orderDate;
 
     @Column(name = "delivery_date")
-    private LocalDateTime deliveryDate;
+    private Date deliveryDate;
 
     public Long getId() {
         return id;
@@ -31,35 +35,27 @@ public class Order {
         this.id = id;
     }
 
-    public Long getProductId() {
-        return productId;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDateTime getOrderDate() {
+    public Date getOrderDate() {
         return orderDate;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
+    public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
     }
 
-    public LocalDateTime getDeliveryDate() {
+    public Date getDeliveryDate() {
         return deliveryDate;
     }
 
-    public void setDeliveryDate(LocalDateTime deliveryDate) {
+    public void setDeliveryDate(Date deliveryDate) {
         this.deliveryDate = deliveryDate;
     }
 }

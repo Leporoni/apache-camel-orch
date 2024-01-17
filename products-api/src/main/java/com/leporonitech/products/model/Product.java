@@ -3,14 +3,16 @@ package com.leporonitech.products.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "tb_product")
 public class Product{
-        @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         @Column(name = "product_id")
-        Long id;
+        private Long id;
         @Column(name = "product_name")
-        String name;
+        private String name;
         @Column(name = "product_price")
-        double price;
+        private double price;
 
         public Long getId() {
                 return id;
