@@ -8,9 +8,8 @@ public class ProductRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("direct:getProducts")
-                .to("bean:productService?method=getAllProducts")
+        from("direct:getAllProducts")
                 .log("Products retrieved from the product API: ${body}")
-                .to("direct:sendToOrderAPI");
+                .to("http://localhost:8088/orders");
     }
 }
