@@ -23,7 +23,7 @@ public class OrderRoute extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("timer://timer?period=5000")
+        from("direct:start")
                 .to("http://localhost:8087/products")
                 .unmarshal().json(JsonLibrary.Jackson, List.class)
                 .process(new Processor() {
